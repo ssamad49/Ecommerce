@@ -12,8 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sellers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+                $table->uuid('id')->primary();
+                $table->string('name')->nullable();
+                $table->string('username')->unique()->nullable();
+                $table->string('email')->unique()->nullable();
+                $table->string('password')->nullable();
+                $table->string('phone')->nullable();
+                $table->string('avatar')->nullable();
+                $table->string('address')->nullable();
+                $table->timestamp('email_verified_at')->nullable();
+                $table->enum('status', ['active', 'Pending'])->default('Pending');
+                $table->string('payment_method')->nullable();
+                $table->string('payment_email')->nullable();
+                $table->timestamps();
+                $table->softDeletes();
         });
     }
 
